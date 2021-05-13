@@ -1,0 +1,17 @@
+[package]
+name = "iota-ed25519-address-wasm"
+version = "0.1.0"
+authors = ["Thoralf-M"]
+edition = "2018"
+
+[lib]
+crate-type = ["cdylib"]
+
+[dependencies]
+wasm-bindgen = { version = "0.2", features = ["serde-serialize"] }
+console_error_panic_hook = "0.1.6"
+getrandom = { version = "0.2.2", features = ["js"], default_features = false }
+iota-crypto = { version = "0.5", features = ["blake2b", "ed25519", "slip10", "bip39", "bip39-en"], default_features = false }
+bee-message = "0.1.1"
+js-sys = "0.3.39"
+hex = "0.4"
