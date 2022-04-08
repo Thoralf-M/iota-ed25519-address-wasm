@@ -59,14 +59,40 @@
 </head>
 
 <body>
-  <h1>Only for debug purposes, never use your real mnemonic</h1>
+  <h1>Only for debug purposes, never use your mainnet mnemonic</h1>
   <br>
   <input type="text" id="mnemonic" placeholder="mnemonic" value="" size="160">
   <br>
-
+  <!-- https://github.com/satoshilabs/slips/blob/master/slip-0044.md -->
+  <label for="coin_type">BIP44 Coin type:</label>
+  <select name="coin_type" id="coin_type">
+    <option value="4218">IOTA = 4218</option>
+    <option value="4219">Shimmer = 4219</option>
+  </select>
+  <input type="text" id="account_index" placeholder="account_index" value="0" size="13">
+  <input type="text" id="internal" placeholder="internal" value="false" size="13">
+  <input type="text" id="address_index" placeholder="address_index" value="0" size="13">
+  <div>Bech32 HRP: IOTA: iota, atoi, Shimmer: smr, rms</div>
+  <input type="text" id="bech32_hrp" placeholder="bech32_hrp" value="iota" size="13">
+  <label for="address_type">Address type:</label>
+  <select name="address_type" id="address_type">
+    <option value="0">Ed25519 = 0</option>
+    <option value="8">Alias = 8</option>
+    <option value="16">Nft = 16</option>
+  </select>
+  <br>
   <input type="button" value="Generate mnemonic" onclick="generate_mnemonic()">
   <input type="button" value="Generate address" onclick="generate_address()">
-
+  <input type="button" value="Change bech32_hrp" onclick="change_bech32_hrp()">
+  <input type="button" value="To bech32 address" onclick="to_bech32_address()">
+  <input type="button" value="Generate address with logs" onclick="generate_address_with_logs()" style="float: right;">
+  <br>
+  <br>
+  <div>Hex encoded address</div>
+  <input type="text" id="address" placeholder="address" value="" size="100">
+  <div>Bech32 encoded address</div>
+  <input type="text" id="bech32_address" placeholder="bech32_address" value="" size="100">
   <span id="result"></span>
+<script type="text/javascript" src="index.js"></script></body>
 
 </html>

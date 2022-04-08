@@ -8,3 +8,5 @@ npm run serve
 ```
 
 and then open http://localhost:8080
+
+For the final build lib.js needs to be copied manually into the target directory.
