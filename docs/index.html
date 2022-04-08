@@ -10,18 +10,22 @@
   <link href="https://fonts.googleapis.com/css2?family=Oxygen+Mono&display=swap" rel="stylesheet">
   <style>
     html {
-      background: rgb(255, 255, 255);
+      background-image: linear-gradient(to right top, #160537, #1e2258, #16255c, #20235c, #230c70);
+       height:100%;
       font-size: 16px;
+      color: white;
     }
-
+    
     body {
       font-family: 'Oxygen Mono', monospace;
     }
-
+    
     input[type="text"] {
-      margin: 10px;
+      margin-top: 10px;
+      margin-bottom: 10px;
       font-family: 'Oxygen Mono', monospace;
       font-size: 16px;
+      background: #d8d8d8;
     }
 
     select {
@@ -39,7 +43,7 @@
 
     .button {
       margin: 0.5rem;
-      color: white;
+      color: rgb(238, 238, 238);
       padding-left: 3rem;
       padding-right: 3rem;
       padding-top: 1.5rem;
@@ -61,7 +65,7 @@
 <body>
   <h1>Only for debug purposes, never use your mainnet mnemonic</h1>
   <br>
-  <input type="text" id="mnemonic" placeholder="mnemonic" value="" size="160">
+  <input type="text" id="mnemonic" placeholder="mnemonic" value="" size="155">
   <br>
   <!-- https://github.com/satoshilabs/slips/blob/master/slip-0044.md -->
   <label for="coin_type">BIP44 Coin type:</label>
