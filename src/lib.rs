@@ -1,6 +1,6 @@
 use wasm_bindgen::prelude::*;
 
-use bee_message::address::{Address, AliasAddress, NftAddress, Ed25519Address};
+use bee_block::address::{Address, AliasAddress, NftAddress, Ed25519Address};
 use crypto::{
     hashes::{blake2b::Blake2b256, Digest},
     keys::{

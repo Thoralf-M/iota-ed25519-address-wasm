@@ -8,12 +8,11 @@ edition = "2018"
 crate-type = ["cdylib"]
 
 [dependencies]
-# bee-message = "0.1.6"
-bee-message = { git = "https://github.com/iotaledger/bee", rev = "3ce056ca8d79d2e752658bb48aa9727d03501e62", default-features = false, features = ["std", "serde1"]}
+bee-block = { git = "https://github.com/iotaledger/bee", rev = "4bc1ce7c3b1203829b5c54aaa86e34d64ecd64e9", default-features = false, features = ["std", "serde"]}
 console_error_panic_hook = "0.1.7"
 getrandom = { version = "0.2.2", features = ["js"], default_features = false }
 hex = "0.4.3"
-iota-crypto = { version = "0.9.1", features = ["blake2b", "ed25519", "slip10", "bip39", "bip39-en"], default_features = false }
+iota-crypto = { version = "0.10.0", features = ["blake2b", "ed25519", "slip10", "bip39", "bip39-en"], default_features = false }
 js-sys = "0.3.57"
 serde_json = "1.0.79"
 wasm-bindgen = { version = "0.2.80", features = ["serde-serialize"] }

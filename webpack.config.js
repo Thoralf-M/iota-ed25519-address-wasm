@@ -11,6 +11,14 @@ module.exports = {
         library: 'wasm',
         libraryExport: 'default'
     },
+    experiments: {
+        asyncWebAssembly: true,
+        syncWebAssembly: true
+      },
+      performance: {
+        maxEntrypointSize: 3512000,
+        maxAssetSize: 3512000
+   },
     plugins: [
         new HtmlWebpackPlugin({
             template: 'index.html'
