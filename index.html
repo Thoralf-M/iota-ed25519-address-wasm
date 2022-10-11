@@ -67,7 +67,8 @@
 <body>
   <h1>Only for debug purposes, never use your mainnet mnemonic</h1>
   <br>
-  <input type="text" id="nodeinfo" placeholder="nodeinfo" value="https://api.testnet.shimmer.network" size="50">
+  <input type="text" id="node_url" placeholder="node_url" value="https://api.testnet.shimmer.network" size="50">
+  <input type="button" value="Get node info" onclick="wasm.get_node_info()">
   <br>
   <input type="text" id="mnemonic" placeholder="mnemonic" value="" size="155">
   <br>
@@ -89,7 +90,6 @@
     <option value="16">Nft = 16</option>
   </select>
   <br>
-  <input type="button" value="Get node info" onclick="wasm.get_node_info()">
   <input type="button" value="Generate mnemonic" onclick="wasm.generate_mnemonic()">
   <input type="button" value="Generate address" onclick="wasm.generate_address()">
   <input type="button" value="Change bech32_hrp" onclick="wasm.change_bech32_hrp()">

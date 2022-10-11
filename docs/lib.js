@@ -20,7 +20,7 @@ async function generate_address() {
     let internal = document.getElementById('internal').value.trim()
     let address_index = document.getElementById('address_index').value.trim()
     let bech32_hrp = document.getElementById('bech32_hrp').value.trim()
-    let result = await lib.generate_address(mnemonic, coin_type, account_index, JSON.parse(internal.toLowerCase()), address_index, bech32_hrp)
+    let result = await lib.generate_address(mnemonic, parseInt(coin_type), parseInt(account_index), JSON.parse(internal.toLowerCase()), parseInt(address_index), bech32_hrp)
     console.log(result);
     document.getElementById('address').value = result.slice(-2, -1)
     document.getElementById('bech32_address').value = result.slice(-1)

@@ -46,7 +46,7 @@ pub fn generate_mnemonic() -> Result<String, JsValue> {
 #[wasm_bindgen]
 pub fn get_node_info(node_url: &str) -> Result<Promise, JsValue> {
     let node_url = node_url.to_owned();
-    let promise: Promise = wasm_bindgen_futures::future_to_promise(async move {
+    Ok(wasm_bindgen_futures::future_to_promise(async move {
         let client = Client::builder()
             .with_node(&node_url)
             .map_err(err)?
@@ -54,17 +54,21 @@ pub fn get_node_info(node_url: &str) -> Result<Promise, JsValue> {
             .finish()
             .map_err(err)?;
 
-        let info = client.get_info().await.map_err(err)?;
+        // for testing, async on client fails, reqwest works
+        let info = client.hex_to_bech32(&"0x296f8b2f8c4a2c28821ebdcc7e591a20d172058a695d16502432ee99d8f013d0", Some(&"smr".to_string())).map_err(err)?;
 
-        JsValue::from_serde(&info).map_err(err)
-    });
-    Ok(promise)
+        // let info = Client::get_node_info(&node_url, None).await.map_err(err)?;
+        // let info = client.get_info().await.map_err(err)?;
+        // let client = reqwest::Client::new();
+        // let info = client.get(node_url).send().await.map_err(err)?.text().await.map_err(err)?;
+        serde_wasm_bindgen::to_value(&info).map_err(err)
+    }))
 }
 
 #[wasm_bindgen]
 pub fn change_bech32_hrp(bech32_address: &str, new_bech32_hrp: &str) -> Result<JsValue, JsValue> {
     let (_bech32_hrp, address) = Address::try_from_bech32(bech32_address).map_err(err)?;
-    JsValue::from_serde(&vec![
+    serde_wasm_bindgen::to_value(&vec![
         serde_json::to_string(&address).map_err(err)?,
         address.to_bech32(new_bech32_hrp),
     ])
@@ -81,7 +85,7 @@ pub fn to_bech32_address(
         Ed25519Address::KIND => Address::Ed25519(Ed25519Address::from_str(address).map_err(err)?),
         AliasAddress::KIND => Address::Alias(AliasAddress::from_str(address).map_err(err)?),
         NftAddress::KIND => Address::Nft(NftAddress::from_str(address).map_err(err)?),
-        _ => return Err(JsValue::from_serde("Invalid address type").map_err(err)?),
+        _ => return Err(serde_wasm_bindgen::to_value("Invalid address type").map_err(err)?),
     };
     Ok(address.to_bech32(bech32_hrp))
 }
@@ -118,7 +122,7 @@ pub fn generate_address(
     let bee_address = Address::Ed25519(ed25519_address);
 
     result.push(bee_address.to_bech32(bech32_hrp));
-    JsValue::from_serde(&result).map_err(err)
+    serde_wasm_bindgen::to_value(&result).map_err(err)
 }
 
 #[wasm_bindgen]
@@ -215,5 +219,5 @@ pub fn generate_address_with_logs(
         "Address Bech32 encoded {}",
         bee_address.to_bech32(bech32_hrp)
     ));
-    JsValue::from_serde(&result).map_err(err)
+    serde_wasm_bindgen::to_value(&result).map_err(err)
 }

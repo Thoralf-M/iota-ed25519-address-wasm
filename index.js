@@ -3,14 +3,6 @@ import('./pkg').then(r => {
     lib = r
 })
 
-async function get_info() {
-    try {
-        //todo
-    } catch (e) {
-        addElement(e)
-    }
-}
-
 async function generate_mnemonic() {
     try {
         let mnemonic = await lib.generate_mnemonic()
@@ -22,10 +14,10 @@ async function generate_mnemonic() {
     }
 }
 
-async function get_node_info(node_url) {
+async function get_node_info() {
     try {
+        let node_url = document.getElementById('node_url').value.trim()
         let nodeinfo = await lib.get_node_info(node_url)
-        document.getElementById('nodeinfo').value = nodeinfo
         console.log(nodeinfo);
         addElement(nodeinfo)
     } catch (e) {
@@ -41,7 +33,7 @@ async function generate_address() {
         let internal = document.getElementById('internal').value.trim()
         let address_index = document.getElementById('address_index').value.trim()
         let bech32_hrp = document.getElementById('bech32_hrp').value.trim()
-        let result = await lib.generate_address(mnemonic, coin_type, account_index, JSON.parse(internal.toLowerCase()), address_index, bech32_hrp)
+        let result = await lib.generate_address(mnemonic, parseInt(coin_type), parseInt(account_index), JSON.parse(internal.toLowerCase()), parseInt(address_index), bech32_hrp)
         console.log(result);
         document.getElementById('address').value = result.slice(-2, -1)
         document.getElementById('bech32_address').value = result.slice(-1)
@@ -59,7 +51,7 @@ async function generate_address_with_logs() {
         let internal = document.getElementById('internal').value.trim()
         let address_index = document.getElementById('address_index').value.trim()
         let bech32_hrp = document.getElementById('bech32_hrp').value.trim()
-        let result = await lib.generate_address_with_logs(mnemonic, coin_type, account_index, JSON.parse(internal.toLowerCase()), address_index, bech32_hrp)
+        let result = await lib.generate_address_with_logs(mnemonic, parseInt(coin_type), parseInt(account_index), JSON.parse(internal.toLowerCase()), parseInt(address_index), bech32_hrp)
         console.log(result);
         document.getElementById('address').value = result.slice(-2, -1)
         document.getElementById('bech32_address').value = result.slice(-1)
