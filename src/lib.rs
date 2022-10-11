@@ -1,6 +1,3 @@
-use wasm_bindgen::prelude::*;
-
-use bee_block::address::{Address, AliasAddress, NftAddress, Ed25519Address};
 use crypto::{
     hashes::{blake2b::Blake2b256, Digest},
     keys::{
@@ -8,6 +5,12 @@ use crypto::{
         slip10::{Chain, Curve, Seed},
     },
 };
+use iota_client::{
+    block::address::{Address, AliasAddress, Ed25519Address, NftAddress},
+    Client,
+};
+use js_sys::Promise;
+use wasm_bindgen::prelude::*;
 
 use core::convert::TryInto;
 extern crate console_error_panic_hook;
@@ -41,18 +44,44 @@ pub fn generate_mnemonic() -> Result<String, JsValue> {
 }
 
 #[wasm_bindgen]
-pub fn change_bech32_hrp(bech32_address: &str, new_bech32_hrp: &str) -> Result<JsValue, JsValue> {
-    let (_bech32_hrp, address) = Address::try_from_bech32(bech32_address).map_err(err)?;
-    JsValue::from_serde(&vec![serde_json::to_string(&address).map_err(err)?, address.to_bech32(new_bech32_hrp)]).map_err(err)
+pub fn get_node_info(node_url: &str) -> Result<Promise, JsValue> {
+    let node_url = node_url.to_owned();
+    let promise: Promise = wasm_bindgen_futures::future_to_promise(async move {
+        let client = Client::builder()
+            .with_node(&node_url)
+            .map_err(err)?
+            .with_node_sync_disabled()
+            .finish()
+            .map_err(err)?;
+
+        let info = client.get_info().await.map_err(err)?;
+
+        JsValue::from_serde(&info).map_err(err)
+    });
+    Ok(promise)
 }
 
 #[wasm_bindgen]
-pub fn to_bech32_address(address: &str, bech32_hrp: &str, address_type: u8) -> Result<String, JsValue> {
+pub fn change_bech32_hrp(bech32_address: &str, new_bech32_hrp: &str) -> Result<JsValue, JsValue> {
+    let (_bech32_hrp, address) = Address::try_from_bech32(bech32_address).map_err(err)?;
+    JsValue::from_serde(&vec![
+        serde_json::to_string(&address).map_err(err)?,
+        address.to_bech32(new_bech32_hrp),
+    ])
+    .map_err(err)
+}
+
+#[wasm_bindgen]
+pub fn to_bech32_address(
+    address: &str,
+    bech32_hrp: &str,
+    address_type: u8,
+) -> Result<String, JsValue> {
     let address = match address_type {
-        Ed25519Address::KIND=> Address::Ed25519(Ed25519Address::from_str(address).map_err(err)?),
-        AliasAddress::KIND=> Address::Alias(AliasAddress::from_str(address).map_err(err)?),
-        NftAddress::KIND=> Address::Nft(NftAddress::from_str(address).map_err(err)?),
-        _ => return Err(JsValue::from_serde("Invalid address type").map_err(err)?)
+        Ed25519Address::KIND => Address::Ed25519(Ed25519Address::from_str(address).map_err(err)?),
+        AliasAddress::KIND => Address::Alias(AliasAddress::from_str(address).map_err(err)?),
+        NftAddress::KIND => Address::Nft(NftAddress::from_str(address).map_err(err)?),
+        _ => return Err(JsValue::from_serde("Invalid address type").map_err(err)?),
     };
     Ok(address.to_bech32(bech32_hrp))
 }

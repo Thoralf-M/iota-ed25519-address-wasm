@@ -2,20 +2,21 @@
 name = "iota-ed25519-address-wasm"
 version = "0.1.0"
 authors = ["Thoralf-M"]
-edition = "2018"
+edition = "2021"
 
 [lib]
 crate-type = ["cdylib"]
 
 [dependencies]
-bee-block = { git = "https://github.com/iotaledger/bee", rev = "4bc1ce7c3b1203829b5c54aaa86e34d64ecd64e9", default-features = false, features = ["std", "serde"]}
 console_error_panic_hook = "0.1.7"
 getrandom = { version = "0.2.2", features = ["js"], default_features = false }
 hex = "0.4.3"
-iota-crypto = { version = "0.10.0", features = ["blake2b", "ed25519", "slip10", "bip39", "bip39-en"], default_features = false }
-js-sys = "0.3.57"
-serde_json = "1.0.79"
-wasm-bindgen = { version = "0.2.80", features = ["serde-serialize"] }
+iota-client = { git = "https://github.com/iotaledger/iota.rs", rev = "3d28b759b44ec50f27ff306751a1394d4881774a", default_features = false, features = ["tls"] }
+iota-crypto = { version = "0.14.3", default-features = false, features = [ "ed25519", "blake2b" ] }
+js-sys = "0.3.60"
+serde_json = "1.0.86"
+wasm-bindgen = { version = "0.2.83", features = ["serde-serialize"] }
+wasm-bindgen-futures = { version = "0.4.33", default-features = false }
 
 [package.metadata.wasm-pack.profile.release]
 wasm-opt = true

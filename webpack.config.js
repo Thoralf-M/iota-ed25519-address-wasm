@@ -9,16 +9,15 @@ module.exports = {
         path: path.resolve(__dirname, 'dist'),
         filename: 'index.js',
         library: 'wasm',
-        libraryExport: 'default'
     },
     experiments: {
         asyncWebAssembly: true,
         syncWebAssembly: true
-      },
-      performance: {
+    },
+    performance: {
         maxEntrypointSize: 3512000,
         maxAssetSize: 3512000
-   },
+    },
     plugins: [
         new HtmlWebpackPlugin({
             template: 'index.html'

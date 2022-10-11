@@ -6,7 +6,6 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>IOTA address generation</title>
   <script src="index.js"></script>
-  <script src="lib.js"></script>
   <link href="https://fonts.googleapis.com/css2?family=Oxygen+Mono&display=swap" rel="stylesheet">
   <style>
     html {
@@ -68,6 +67,8 @@
 <body>
   <h1>Only for debug purposes, never use your mainnet mnemonic</h1>
   <br>
+  <input type="text" id="nodeinfo" placeholder="nodeinfo" value="https://api.testnet.shimmer.network" size="50">
+  <br>
   <input type="text" id="mnemonic" placeholder="mnemonic" value="" size="155">
   <br>
   <!-- https://github.com/satoshilabs/slips/blob/master/slip-0044.md -->
@@ -88,11 +89,12 @@
     <option value="16">Nft = 16</option>
   </select>
   <br>
-  <input type="button" value="Generate mnemonic" onclick="generate_mnemonic()">
-  <input type="button" value="Generate address" onclick="generate_address()">
-  <input type="button" value="Change bech32_hrp" onclick="change_bech32_hrp()">
-  <input type="button" value="To bech32 address" onclick="to_bech32_address()">
-  <input type="button" value="Generate address with logs" onclick="generate_address_with_logs()" style="float: right;">
+  <input type="button" value="Get node info" onclick="wasm.get_node_info()">
+  <input type="button" value="Generate mnemonic" onclick="wasm.generate_mnemonic()">
+  <input type="button" value="Generate address" onclick="wasm.generate_address()">
+  <input type="button" value="Change bech32_hrp" onclick="wasm.change_bech32_hrp()">
+  <input type="button" value="To bech32 address" onclick="wasm.to_bech32_address()">
+  <input type="button" value="Generate address with logs" onclick="wasm.generate_address_with_logs()" style="float: right;">
   <br>
   <br>
   <div>Hex encoded address</div>
