@@ -677,12 +677,14 @@ source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "7a5bbe824c507c5da5956355e86a746d82e0e1464f65d862cc5e71da70e94b2c"
 dependencies = [
  "cfg-if",
+ "js-sys",
+ "wasm-bindgen",
+ "web-sys",
 ]
 
 [[package]]
 name = "iota-client"
 version = "2.0.1-rc.3"
-source = "git+https://github.com/iotaledger/iota.rs?branch=develop#b5df2e1dbed095085fadb5f957104c577873ab4b"
 dependencies = [
  "async-trait",
  "derive_builder",
@@ -739,7 +741,6 @@ dependencies = [
  "iota-client",
  "iota-crypto",
  "js-sys",
- "reqwest",
  "serde-wasm-bindgen",
  "serde_json",
  "wasm-bindgen",
@@ -749,7 +750,6 @@ dependencies = [
 [[package]]
 name = "iota-pow"
 version = "1.0.0-rc.1"
-source = "git+https://github.com/iotaledger/iota.rs?branch=develop#b5df2e1dbed095085fadb5f957104c577873ab4b"
 dependencies = [
  "iota-crypto",
  "thiserror",
@@ -758,7 +758,6 @@ dependencies = [
 [[package]]
 name = "iota-types"
 version = "1.0.0-rc.1"
-source = "git+https://github.com/iotaledger/iota.rs?branch=develop#b5df2e1dbed095085fadb5f957104c577873ab4b"
 dependencies = [
  "bech32",
  "bitflags",
