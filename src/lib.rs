@@ -55,7 +55,7 @@ pub fn get_node_info(node_url: &str) -> Result<Promise, JsValue> {
             .map_err(err)?;
 
         // for testing, async on client fails, reqwest works
-        let info = client.hex_to_bech32(&"0x296f8b2f8c4a2c28821ebdcc7e591a20d172058a695d16502432ee99d8f013d0", Some(&"smr".to_string())).map_err(err)?;
+        let info = client.hex_to_bech32(&"0x296f8b2f8c4a2c28821ebdcc7e591a20d172058a695d16502432ee99d8f013d0", Some(&"smr".to_string())).await.map_err(err)?;
 
         // let info = Client::get_node_info(&node_url, None).await.map_err(err)?;
         // let info = client.get_info().await.map_err(err)?;
