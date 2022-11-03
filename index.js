@@ -19,7 +19,7 @@ async function get_node_info() {
         let node_url = document.getElementById('node_url').value.trim()
         let nodeinfo = await lib.get_node_info(node_url)
         console.log(nodeinfo);
-        addElement(nodeinfo)
+        addElement(JSON.stringify(nodeinfo))
     } catch (e) {
         addElement(e)
     }
