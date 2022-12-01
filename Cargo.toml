@@ -11,11 +11,10 @@ crate-type = ["cdylib"]
 console_error_panic_hook = "0.1.7"
 getrandom = { version = "0.2.2", features = ["js"], default_features = false }
 hex = "0.4.3"
-iota-client = { path = "../iota.rs/client", default_features = false, features = ["tls"] }
-# iota-client = { git = "https://github.com/iotaledger/iota.rs", branch = "develop", default_features = false, features = ["tls"] }
-# iota-client = { git = "https://github.com/iotaledger/iota.rs", rev = "b5df2e1dbed095085fadb5f957104c577873ab4b", default_features = false, features = ["tls"] }
+iota-client = { git = "https://github.com/iotaledger/iota.rs", rev = "dd3ac9e41203a71aab265df82b7b5fcebd1f7692", default_features = false, features = ["tls"] }
 iota-crypto = { version = "0.15.2", default-features = false, features = [ "ed25519", "blake2b" ] }
 js-sys = "0.3.60"
+prefix-hex = { version = "0.5.0", default-features = false, features = [ "primitive-types" ] }
 serde_json = "1.0.86"
 serde-wasm-bindgen = "0.4.5"
 wasm-bindgen = { version = "0.2.83", features = ["serde-serialize"] }

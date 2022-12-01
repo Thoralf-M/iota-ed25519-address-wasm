@@ -50,7 +50,7 @@ pub fn get_node_info(node_url: &str) -> Result<Promise, JsValue> {
         let client = Client::builder()
             .with_node(&node_url)
             .map_err(err)?
-            .with_node_sync_disabled()
+            .with_ignore_node_health()
             .finish()
             .map_err(err)?;
 
@@ -82,6 +82,16 @@ pub fn to_bech32_address(
         _ => return Err(serde_wasm_bindgen::to_value("Invalid address type").map_err(err)?),
     };
     Ok(address.to_bech32(bech32_hrp))
+}
+
+#[wasm_bindgen]
+pub fn hash_public_key(public_key: &str) -> Result<String, JsValue> {
+    let public_key: [u8; Ed25519Address::LENGTH] = prefix_hex::decode(public_key).map_err(err)?;
+
+    let address = Blake2b256::digest(public_key).try_into().map_err(err)?;
+    let address: Ed25519Address = Ed25519Address::new(address);
+
+    Ok(address.to_string())
 }
 
 #[wasm_bindgen]

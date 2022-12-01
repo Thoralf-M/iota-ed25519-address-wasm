@@ -81,6 +81,7 @@
   <input type="text" id="account_index" placeholder="account_index" value="0" size="13">
   <input type="text" id="internal" placeholder="internal" value="false" size="13">
   <input type="text" id="address_index" placeholder="address_index" value="0" size="13">
+  <input type="text" id="addresses_amount" placeholder="addresses_amount" value="1" size="13">
   <div>Bech32 HRP: IOTA: iota, atoi, Shimmer: smr, rms</div>
   <input type="text" id="bech32_hrp" placeholder="bech32_hrp" value="iota" size="13">
   <label for="address_type">Address type:</label>
@@ -92,16 +93,36 @@
   <br>
   <input type="button" value="Generate mnemonic" onclick="wasm.generate_mnemonic()">
   <input type="button" value="Generate address" onclick="wasm.generate_address()">
+  <input type="button" value="Generate addresses" onclick="wasm.generate_addresses()">
   <input type="button" value="Change bech32_hrp" onclick="wasm.change_bech32_hrp()">
   <input type="button" value="To bech32 address" onclick="wasm.to_bech32_address()">
+  <input type="button" value="Hash public key" onclick="wasm.hash_public_key()">
   <input type="button" value="Generate address with logs" onclick="wasm.generate_address_with_logs()" style="float: right;">
   <br>
   <br>
-  <div>Hex encoded address</div>
+  <div>Public key</div>
+  <input type="text" id="public_key" placeholder="public_key" value="" size="100">
+  <br>
+  <div>Hex encoded address (hash(public key)</div>
   <input type="text" id="address" placeholder="address" value="" size="100">
   <div>Bech32 encoded address</div>
   <input type="text" id="bech32_address" placeholder="bech32_address" value="" size="100">
+  <br>
+  <br>
+  <div><input type="button" value="Clear output" onclick="wasm.clear_output()">Output:</div>
   <span id="result"></span>
+  <br>
+  <br>
+  <div>Bytes</div>
+  <input type="button" value="Bytes to hex" onclick="wasm.bytes_to_hex()">
+  <input type="text" id="bytes" placeholder="0, 1" value="" size="100">
+  <div>Hex encoded bytes</div>
+  <input type="button" value="Hex to bytes" onclick="wasm.hex_to_bytes()">
+  <input type="text" id="bytes_hex" placeholder="0x" value="" size="100">
+  <div>Bytes utf-8</div>
+  <input type="button" value="Bytes to utf-8" onclick="wasm.bytes_to_utf8()">
+  <input type="button" value="Utf-8 to bytes" onclick="wasm.utf8_to_bytes()">
+  <input type="text" id="bytes_utf8" placeholder="bytes_utf8" value="" size="100">
 </body>
 
 </html>
