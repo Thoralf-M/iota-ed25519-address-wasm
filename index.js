@@ -190,4 +190,15 @@ function utf8_to_bytes() {
     document.getElementById('bytes').value = bytes
 }
 
-export { bytes_to_utf8, utf8_to_bytes, bytes_to_hex, hex_to_bytes, clear_output, generate_mnemonic, get_node_info, generate_address, generate_addresses, generate_address_with_logs, change_bech32_hrp, to_bech32_address, hash_public_key };
+async function hash_output_id() {
+    try {
+        let output_id = document.getElementById("output_id").value.trim();
+        let result = await lib.hash_output_id(output_id)
+        console.log(result);
+        addElement(JSON.stringify(result, null, 1))
+    } catch (e) {
+        addElement(e)
+    }
+}
+
+export { bytes_to_utf8, hash_output_id, utf8_to_bytes, bytes_to_hex, hex_to_bytes, clear_output, generate_mnemonic, get_node_info, generate_address, generate_addresses, generate_address_with_logs, change_bech32_hrp, to_bech32_address, hash_public_key };

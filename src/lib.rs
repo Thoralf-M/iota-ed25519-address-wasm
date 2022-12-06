@@ -6,7 +6,10 @@ use crypto::{
     },
 };
 use iota_client::{
-    block::address::{Address, AliasAddress, Ed25519Address, NftAddress},
+    block::{
+        address::{Address, AliasAddress, Ed25519Address, NftAddress},
+        output::OutputId,
+    },
     Client,
 };
 use js_sys::Promise;
@@ -92,6 +95,12 @@ pub fn hash_public_key(public_key: &str) -> Result<String, JsValue> {
     let address: Ed25519Address = Ed25519Address::new(address);
 
     Ok(address.to_string())
+}
+
+#[wasm_bindgen]
+pub fn hash_output_id(output_id: &str) -> Result<String, JsValue> {
+    let output_id = OutputId::from_str(output_id).map_err(err)?;
+    Ok(prefix_hex::encode(output_id.hash()))
 }
 
 #[wasm_bindgen]
